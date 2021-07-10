@@ -2,11 +2,14 @@ import React from "react"
 import { Route } from "react-router-dom"
 import { Home } from "./Home"
 import { AnimalProvider } from "./animal/AnimalProvider"
-import { AnimalCard } from "./animal/AnimalCard"
+import { CustomerProvider } from "./customers/CustomerProvider"
+import { EmployeeProvider } from "./employees/EmployeeProvider"
+import { LocationProvider } from "./locations/LocationProvider"
 import { AnimalList } from "./animal/AnimalList"
-import { EmployeesCard } from "./employees/EmployeesCard"
-import { LocationsCard } from "./locations/LocationsCard"
-import { CustomersCard } from "./customers/CustomersCard"
+import { CustomerList } from "./customers/CustomerList"
+import { EmployeeList } from "./employees/EmployeeList"
+import { LocationList } from "./locations/LocationList"
+
 
 
 export const ApplicationViews = () => {
@@ -23,17 +26,23 @@ export const ApplicationViews = () => {
           </Route>
         </AnimalProvider>
 
-        <Route path="/locations">
-          <LocationsCard />
-        </Route>
+        <CustomerProvider>
+          <Route exact path="/customers">
+            <CustomerList />
+          </Route>
+        </CustomerProvider>
 
-        <Route path="/customers">
-          <CustomersCard />
-        </Route>
+        <EmployeeProvider>
+          <Route exact path="/employees">
+            <EmployeeList />
+          </Route>
+        </EmployeeProvider>
 
-        <Route path="/employees">
-          <EmployeesCard />
-        </Route>
+        <LocationProvider>
+          <Route exact path="/locations">
+            <LocationList />
+          </Route>
+        </LocationProvider>
       </>
     );
 }
