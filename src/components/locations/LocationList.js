@@ -1,11 +1,14 @@
 import React, { useContext, useEffect } from "react"
 import { LocationContext } from "./LocationProvider"
 import { LocationCard } from "./LocationCard"
+import { useHistory } from 'react-router-dom';
 import "./Locations.css"
 
 export const LocationList = () => {
   // This state changes when `getLocations()` is invoked below
   const { locations, getLocations } = useContext(LocationContext)
+  const history = useHistory()
+
 
   //useEffect - reach out to the world for something
   useEffect(() => {
@@ -16,6 +19,17 @@ export const LocationList = () => {
 
 
   return (
+    <>
+    <h2>Locations</h2>
+        <button
+          className="clickMe"
+          onClick={() => {
+            history.push("/locations/create");
+          }}
+        >
+          Add A Location
+        </button>
+
     <div className="locations">
       {console.log("LocationList: Render", locations)}
       {
@@ -24,5 +38,6 @@ export const LocationList = () => {
         })
       }
     </div>
+    </>
   )
 }

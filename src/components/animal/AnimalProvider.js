@@ -8,10 +8,16 @@ export const AnimalProvider = (props) => {
     const [animals, setAnimals] = useState([])
 
     const getAnimals = () => {
-        return fetch("http://localhost:8088/animals?_expand=location")
+        return fetch("http://localhost:8088/animals?_expand=location&_expand=customer")
         .then(res => res.json())
         .then(setAnimals)
     }
+
+    const getAnimalById = (id) => {
+        return fetch(`http://localhost:8088/animals/${id}?_expand=location&_expand=customer`)
+        .then(res => res.json()) // note we don't set anything on state here. Why?
+    }
+    
 
     const addAnimal = animalObj => {
         return fetch("http://localhost:8088/animals", {
@@ -21,7 +27,7 @@ export const AnimalProvider = (props) => {
             },
             body: JSON.stringify(animalObj)
         })
-        .then(getAnimals)
+        .then(setAnimals)
     }
 
     /*
@@ -32,7 +38,7 @@ export const AnimalProvider = (props) => {
     */
     return (
         <AnimalContext.Provider value={{
-            animals, getAnimals, addAnimal
+            animals, getAnimals, addAnimal, getAnimalById
         }}>
             {props.children}
         </AnimalContext.Provider>
