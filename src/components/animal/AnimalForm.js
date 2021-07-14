@@ -118,4 +118,3 @@ export const AnimalForm = () => {
   )
 }
 
-//? What is a fieldset html element? I don't feel like looking it up right now
